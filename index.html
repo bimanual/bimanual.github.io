@@ -1,1 +1,779 @@
-:)
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="PerAct^: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks">
+  <meta name="keywords" content="Transformers, Language Grounding, Manipulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PerAct<sup>2</sup></title>
+
+  <script>
+    function updateSingleVideo() {
+      var method = document.getElementById("single-menu-method").value;
+      var demo = document.getElementById("single-menu-demos").value;
+      var task = document.getElementById("single-menu-tasks").value;
+      var inst = document.getElementById("single-menu-instances").value;
+
+
+      var full_path = window.location.pathname
+
+
+      var href = window.location.href;
+      var dir = href.substring(0, href.lastIndexOf('/'));
+
+
+      var video = document.getElementById("single-task-result-video");
+      video.src = dir + "/media/simulation/i256_d" + demo + "/" + task + "_" + method + "_" + inst + ".mp4";
+
+      console.log(video.src);
+      video.playbackRate = 1.75;
+      video.play();
+    }
+
+
+    function updateMultiVideo() {
+      var method = document.getElementById("multi-menu-method").value;
+      var demo = document.getElementById("multi-menu-demos").value;
+      var task = document.getElementById("multi-menu-tasks").value;
+      var inst = document.getElementById("multi-menu-instances").value;
+
+      var full_path = window.location.pathname
+
+
+      var href = window.location.href;
+      var dir = href.substring(0, href.lastIndexOf('/'));
+
+      var video = document.getElementById("multi-task-result-video");
+      video.src = dir + "/media/simulation/multi/" + demo + "/" + task + "_" + method + "_" + inst + ".mp4";
+
+
+      console.log(video.src)
+
+      video.playbackRate = 1.75;
+      video.play();
+    }
+
+
+
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+
+
+
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    caption {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    th,
+    td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .checkmark {
+      color: green;
+    }
+
+    .cross {
+      color: red;
+    }
+
+    .star {
+      content: " ↑";
+      color: #DAA520;
+      /* Gold color */
+    }
+
+    .arrowup::after {
+      content: " ↑";
+      color: green;
+    }
+
+    .arrowdown::after {
+      content: " ↓";
+      color: red;
+    }
+  </style>
+
+
+</head>
+
+<body onload="updateSingleVideo(); updateMultiVideo();">
+
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">PerAct<sup>2</sup>: Benchmarking and Learning for <br /> Robotic
+              Bimanual Manipulation Tasks</h1>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link.
+              <span class="link-block">
+                <a target="_blank" href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>  -->
+
+                <!-- Arxiv Link. 
+            <span class="link-block">
+              <a target="_blank" href="#" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file"></i>
+                </span>
+                <span>ArXiv</span>
+              </a>
+            </span> -->
+
+                <!-- Video Link. 
+            <span class="link-block">
+              <a target="_blank" href="#"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-youtube"></i>
+                </span>
+                <span>Video</span>
+              </a>
+            </span> -->
+
+                <!-- Talk Link.
+            <span class="link-block">
+              <a target="_blank" href="#"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </span>
+                <span>Talk</span>
+              </a>
+            </span>  -->
+
+
+                <!-- Colab Link. 
+            <span class="link-block">
+              <a target="_blank" href="#"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                </span>
+                <span>Colab</span>
+                </a>
+            </span> -->
+
+                <!-- Code Link.
+            <span class="link-block">
+              <a target="_blank" href="#https://github.com/bimanual/bimanual-peract"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+                </a>
+            </span>  -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+
+
+
+    <div class="hero-body">
+      <div class="container">
+        <div id="demo-carousel" class="carousel" style="overflow: hidden">
+          <div class="item item-1">
+            <video id="teaser_box" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_coordinated_push_box.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(a) push box</div>
+            <br />
+            <video id="teaser_ball" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_coordinated_lift_ball.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(b) lift the ball</div>
+          </div>
+          <div class="item item-2">
+            <video id="teaser_buttons" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_dual_push_buttons.mp4" type="video/mp4">
+            </video>
+            <div style="width: 100%; text-align: center;">(c) press two buttons</div>
+            <br />
+            <video id="teaser_plate" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_bimanual_pick_plate.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(d) pick up the plate</div>
+          </div>
+          <div class="item item-3">
+            <video id="teaser_drawer" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_coordinated_put_item_in_drawer.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(e) put the item into the drawer</div>
+            <br />
+            <video id="teaser_fridge" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_coordinated_put_bottle_in_fridge.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(f) put the bottle into the fridge</div>
+
+          </div>
+          <div class="item item-4 is-active">
+            <video id="teaser_handover" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_handover_item.mp4" type="video/mp4">
+            </video>
+            <div style="width: 100%; text-align: center;">(g) handover a item</div>
+            <br />
+            <video id="teaser_laptop" autoplay playsinline muted loop width="100%">
+              <source src="media/demo_videos/rlbench_video_bimanual_pick_laptop.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(h) pick up the notebook</div>
+
+          </div>
+          <div class="item item-5">
+            <video id="teaser_rope" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_bimanual_straighten_rope.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(i) straighten the rope</div>
+            <br />
+            <video id="teaser_dustpan" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_bimanual_sweep_to_dustpan.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(j) sweep dust pan</div>
+          </div>
+          <div class="item  item-6">
+            <video id="teaser_tray" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_coordinated_lift_tray.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(k) lift the tray</div>
+            <br />
+            <video id="teaser_handover_easy" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_handover_item_easy.mp4" type="video/mp4">
+            </video>
+            <div style="width: 100%; text-align: center;">(l) handover an item (easy)</div>
+
+          </div>
+          <div class="item item-7">
+            <div style="height: 128px"> </div>
+            <video id="teaser_oven" autoplay playsinline muted loop width="100%">
+              <source src="./media/demo_videos/rlbench_video_coordinated_take_tray_out_of_oven.mp4" type="video/mp4" />
+            </video>
+            <div style="width: 100%; text-align: center;">(m) take tray out of oven</div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Bimanual manipulation is challenging due to precise spatial and temporal coordination required between two
+              arms. While there exist several real-world
+              bimanual systems, there is a lack of simulated benchmarks with a large task diversity for systematically
+              studying bimanual capabilities across a wide range of table-
+              top tasks. This paper addresses the gap by extending RLBench to bimanual manipulation. We open-source our
+              code and benchmark, which comprises 13 new
+              tasks with 23 unique task variations, each requiring a high degree of coordination and adaptability. To
+              kickstart the benchmark, we extended several state-of-the-art
+              methods to bimanual manipulation and also present a language-conditioned behavioral cloning agent –
+              PerAct2, an extension of the PerAct framework.
+              This method enables the learning and execution of bimanual 6-DoF manipulation tasks. Our novel network
+              architecture efficiently integrates language processing
+              with action prediction, allowing robots to understand and perform complex bimanual tasks in response to
+              user-specified goals.
+            </p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <!--/ Abstract. -->
+
+    </div>
+
+
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-widescreen">
+
+      <div class="rows">
+
+        <div class="rows is-centered ">
+          <div class="row is-full-width">
+            <h2 class="title is-3">Benchmark</h2>
+            <h3 class="title is-4">Benchmarking Bimanual Robotic Manipulation Tasks</h3>
+            <div class="content has-text-justified">
+              <p>
+                To benchmark, we extend RLBench to the complex bimanual case by adding functionality and tasks for
+                bimanual manipulation
+
+                RLBench is a robot learning benchmark suite consisting of more than 100 tasks to facilitate robot
+                learning, which is widely used in the community. Among task diversity other key properties include
+                reproducibility or the ability to adapt to different learning strategies.
+                We extend RLBench to bimanual manipulation, while keeping the functionality and its key properties. This
+                allows us to quantify the success of our method and to compare it against other baselines. Compared to
+                unimanual manipulation, bimanual manipulation is more challenging as it requires different kinds of
+                coordination and orchestration of the two arms.
+                For the implementation side this makes it much more complex since synchronization is required when
+                controlling both arms at the same time.
+                <br />
+                The following table classifies the tasks according to the bimanual taxonomy of Krebs et al..
+                Here, key distinguishing factors are the coupling as well as the required coordination between the two
+                arms. We extended the classification in that we also distinguish between physical coupling, i.e., if one
+                arm exerts a force that could be measured by the other arm.
+              </p>
+
+              <table>
+                <caption>Classification of the bimanual tasks</caption>
+                <thead>
+                  <tr>
+                    <th rowspan="2">Task</th>
+                    <th colspan="3" style="text-align: center">Coupled</th>
+                    <th colspan="2" style="text-align: center">Coordination</th>
+                  </tr>
+                  <tr>
+                    <th style="text-align: center">temporal</th>
+                    <th style="text-align: center">spatial</th>
+                    <th style="text-align: center">physical</th>
+                    <th style="text-align: center">symmetric</th>
+                    <th style="text-align: center">synchronous</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>(a) push box</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                  </tr>
+                  <tr>
+                    <td>(b) lift a ball</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                  </tr>
+                  <tr>
+                    <td>(c) push two buttons</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                  </tr>
+                  <tr>
+                    <td>(d) pick up a plate</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                  </tr>
+                  <tr>
+                    <td>(e) put item in drawer</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                  </tr>
+                  <tr>
+                    <td>(f) put bottle in fridge</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                  </tr>
+                  <tr>
+                    <td>(g) handover an item</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10004;</td>
+                  </tr>
+                  <tr>
+                    <td>(h) pick up notebook</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                  </tr>
+                  <tr>
+                    <td>(i) straighten rope</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10004;</td>
+                  </tr>
+                  <tr>
+                    <td>(j) sweep dust pan</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                  </tr>
+                  <tr>
+                    <td>(k) lift tray</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                  </tr>
+                  <tr>
+                    <td>(l) handover item (easy)</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                  </tr>
+                  <tr>
+                    <td>(m) take tray out of oven</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10004;</td>
+                    <td style="text-align: center">&#10008;</td>
+                    <td style="text-align: center">&#10008;</td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <div class="rows">
+        <div class="rows is-centered ">
+          <div class="row is-full-width">
+            <h2 class="title is-3"><span class="dperact">PerAct<sup>2</sup></span></h2>
+            <h3 class="title is-4">A Perceiver-Actor Framework
+              for Bimanual Robotic Manipulation Tasks</h3>
+            <div class="content has-text-justified">
+              <!-- <br> -->
+            </div>
+            <p>
+              The system architecture. <span class="dperact">PerAct<sup>2</sup></span> takes proprioception, RGB-D
+              camera images as well as a task description as input. The voxel grid is constructed by merging data from
+              multiple RGB-D cameras. A PerceiverIO transformer is utilized to learn features at both the voxel and
+              language levels. The output for each robot arm includes a discretized action, which comprises a
+              six-dimensional end-effector pose, the state of the gripper, and an extra indicator for planning motion
+              with collision awareness.
+
+            </p>
+            <br />
+            <br />
+            <img src="media/figures/system_architecture.png" class="interpolation-image"
+              alt="The system architecture" />
+            </br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-widescreen">
+
+      <div class="rows">
+
+        <h2 class="title is-3">Results</h2>
+
+        <h2 class="title is-4">Real-world experiments</h2>
+        <div class="container">
+          The system architecture is robot agnostic since it predicts a 6-D pose.
+          The method also works in real-world and can be easily transfered to other robots, e.g. a humanoid robot.
+        </div>
+        <div class="hero-body">
+          <div class="container">
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="item item-bowl">
+                <video poster="" id="bowl" autoplay playsinline muted loop height="100%">
+                  <source src="media/real_world/bowl.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-chair">
+                <video poster="" id="fullbody" autoplay playsinline muted loop height="100%">
+                  <source src="media/real_world/chair.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-coke">
+                <video poster="" id="coke" autoplay playsinline muted loop height="100%">
+                  <source src="media/real_world/coke.mp4" type="video/mp4">
+                </video>
+              </div>
+
+              <div class="item item-tool">
+                <video poster="" id="tool" autoplay playsinline muted loop height="100%">
+                  <source src="media/real_world/tool.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <h3 class="title is-4">Simulation Results</h3>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Single task results</h3>
+
+            Method <div class="select is-small">
+              <select id="single-menu-method" onchange="updateSingleVideo()">
+                <option value="bimanual" selected>PerAct<sup>2</sup></option>
+                <option value="peract">Leader-follower PerAct</option>
+                <option value="rvt">Leader-follower RVT</option>
+                <option value="act">ACT</option>
+              </select>
+            </div>
+            trained with
+            <div class="select is-small">
+              <select id="single-menu-demos" onchange="updateSingleVideo()">
+                <option value="10" disabled>10</option>
+                <option value="100" selected>100</option>
+              </select>
+            </div>
+            demos per task, evaluated on
+            <div class="select is-small">
+              <select id="single-menu-tasks" onchange="updateSingleVideo()">
+                <option value="coordinated_push_box">Push box</option>
+                <option value="coordinated_lift_ball">Lift ball</option>
+                <option value="dual_push_buttons">Push two puttons</option>
+                <option value="bimanual_pick_plate">Pickup plate</option>
+                <option value="coordinated_put_item_in_drawer" selected>Put item in drawer</option>
+                <option value="coordinated_put_bottle_in_fridge">Put bottle in fridge</option>
+                <option value="handover_item">Handover item</option>
+                <option value="bimanual_pick_laptop">Pickup laptop</option>
+                <option value="bimanual_straighten_rope">Straighten rope</option>
+                <option value="bimanual_sweep_to_dustpan">Sweep to dustpan</option>
+                <option value="coordinated_lift_tray">Lift tray</option>
+                <option value="handover_item_easy">Handover item (easy)</option>
+                <option value="coordinated_take_tray_out_of_oven">Take tray out of oven</option>
+              </select>
+            </div>
+            episode
+            <div class="select is-small">
+              <select id="single-menu-instances" onchange="updateSingleVideo()">
+                <option value="0">01</option>
+                <option value="1">02</option>
+                <option value="2">03</option>
+                <option value="3">04</option>
+                <option value="4" selected>05</option>
+              </select>
+            </div>
+            <br />
+            <br />
+
+            <video id="single-task-result-video" muted autoplay playsinline loop width="640px">
+              <source src="#" type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+
+
+  <section class="section">
+    <div class="container is-max-widescreen">
+
+      <div class="rows">
+
+        <table>
+          <caption>Task success rates for single task training</caption>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th style="text-align: center; width: 12.5%;">(a) box</th>
+              <th style="text-align: center; width: 12.5%;">(b) ball</th>
+              <th style="text-align: center; width: 12.5%;">(c) buttons</th>
+              <th style="text-align: center; width: 12.5%;">(d) plate</th>
+              <th style="text-align: center; width: 12.5%;">(e) drawer</th>
+              <th style="text-align: center; width: 12.5%;">(f) fridge</th>
+              <th style="text-align: center; width: 12.5%;">(g) handover</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ACT</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">36%</td>
+              <td style="text-align: right;">4%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">13%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">0%</td>
+            </tr>
+            <tr>
+              <td>RVT-LF</td>
+              <td style="text-align: right;">52%</td>
+              <td style="text-align: right;">17%</td>
+              <td style="text-align: right;">39%</td>
+              <td style="text-align: right;">3%</td>
+              <td style="text-align: right;">10%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">0%</td>
+            </tr>
+            <tr>
+              <td>PerAct-LF</td>
+              <td style="text-align: right;">⭐ 57%</td>
+              <td style="text-align: right;">40%</td>
+              <td style="text-align: right;">10%</td>
+              <td style="text-align: right;">2%</td>
+              <td style="text-align: right;">⭐ 27%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">0%</td>
+            </tr>
+            <tr>
+              <td>PerAct<sup>2</sup> (ours)</td>
+              <td style="text-align: right;">6%</td>
+              <td style="text-align: right;">⭐ 50%</td>
+              <td style="text-align: right;">⭐ 47%</td>
+              <td style="text-align: right;">⭐ 4%</td>
+              <td style="text-align: right;">10%</td>
+              <td style="text-align: right;">⭐ 3%</td>
+              <td style="text-align: right;">⭐ 11%</td>
+            </tr>
+            <tr>
+              <th>Method</th>
+              <th style="text-align: center; width: 12.5%;">(h) laptop</th>
+              <th style="text-align: center; width: 12.5%;">(i) rope</th>
+              <th style="text-align: center; width: 12.5%;">(j) dust</th>
+              <th style="text-align: center; width: 12.5%;">(k) tray</th>
+              <th style="text-align: center; width: 12.5%;">(l) handover easy</th>
+              <th style="text-align: center; width: 12.5%;">(m) oven</th>
+            </tr>
+            <tr>
+              <td>ACT</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">16%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">6%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">2%</td>
+            </tr>
+            <tr>
+              <td>RVT-LF</td>
+              <td style="text-align: right;">3%</td>
+              <td style="text-align: right;">3%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">6%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">3%</td>
+            </tr>
+            <tr>
+              <td>PerAct-LF</td>
+              <td style="text-align: right;">11%</td>
+              <td style="text-align: right;">21%</td>
+              <td style="text-align: right;">⭐ 28%</td>
+              <td style="text-align: right;">⭐ 14%</td>
+              <td style="text-align: right;">9%</td>
+              <td style="text-align: right;">8%</td>
+            </tr>
+            <tr>
+              <td>PerAct<sup>2</sup> (ours)</td>
+              <td style="text-align: right;">⭐ 12%</td>
+              <td style="text-align: right;">⭐ 24%</td>
+              <td style="text-align: right;">0%</td>
+              <td style="text-align: right;">1%</td>
+              <td style="text-align: right;">⭐ 41%</td>
+              <td style="text-align: right;">⭐ 9%</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <footer class="footer">
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column">
+                <div class="content has-text-centered">
+                  <p>
+                    Website template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>
+                    made by the amazing <a href="https://keunhong.com/">Keunhong Park</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+
+</body>
+
+</html>
