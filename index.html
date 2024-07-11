@@ -202,7 +202,21 @@
                 </a>
             </span> -->
 
-                <!-- Code Link.
+            <span class="link-block">
+              <a  href="javascript:void($('#dataset').toggle());"
+                  id="dataset-button"
+                 class="button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fa fa-image"></i>                    
+                </span>
+                <span>Dataset</span>
+                <span class="icon">
+                <i class="fas fa-angle-down fa-lg rotate"></i>
+              </span>
+                </a>
+            </span> 
+
+                <!-- Code Link. 
             <span class="link-block">
               <a target="_blank" href="#https://github.com/bimanual/bimanual-peract"
                  class="external-link button is-normal is-rounded is-dark">
@@ -220,6 +234,163 @@
       </div>
     </div>
   </section>
+
+  <style>
+    .rotate {
+      float: right;
+      transition: all 0.3s linear;
+    }
+  
+    .rotate.down {
+      transform: rotate(180deg);
+    }
+  </style>
+  
+  <script>
+    $('#dataset-button').click(function () { $(".rotate").toggleClass("down"); });
+  </script>
+
+  <section class="section" id="dataset" style="display: none;">
+    <div class="container is-max-widescreen">
+
+      <div class="rows">
+
+        <div class="rows is-centered ">
+          <div class="row is-full-width">
+            <h3 class="title is-4">Dataset Download</h3>
+            <div class="content has-text-justified">
+              <p>
+                The table below provides links to each task within the dataset. Please be aware that these files are quite large and may require significant download time. If you need alternative download options, please contact the authors directly.
+             To ensure the integrity of the downloaded files, it is recommended to verify the checksums using SHA256 (<a target="_blank" href="./dataset/SHA256SUM"><i class="fas fa-link"></i> Download</a>) or SHA512 (<a target="_blank" href="./dataset/SHA512SUM"><i class="fas fa-link"></i> Download</a>) . Here are the instructions for checking the checksum and unpacking the squashfs files:</p>
+              <ol>
+                <li>Download the file and its corresponding checksum file.</li>
+                <li>Run the following command to check the SHA256 checksum:
+                  <pre><code>sha256sum -c SHA256SUMS</code></pre>
+                </li>
+              
+                <li>To work with the squashfs file, you will need <code>unsquashfs</code>. If you don't have it installed, you can
+                  install it on Linux using:
+                  <pre><code>sudo apt install squashfs-tools</code></pre>
+                </li>
+              
+                <li>You can mount the squashfs file without unpacking it once <code>unsquashfs</code> is installed. To do this, create
+                  a mount point and then mount the file:
+                  <pre><code>sudo mkdir /mnt/rlbench_data<br />mount filename.squashfs /mnt/rlbench_data -t squashfs -o loop</code></pre>
+                </li>
+              
+                <li>Alternatively, run the following command to unpack the file:
+                  <pre><code>unsquashfs filename.squashfs</code></pre>
+                </li>
+                <li>The contents will be extracted to a directory named <code>squashfs-root</code> by default. You can specify a
+                  different directory using the <code>-d</code> option:
+                  <pre><code>unsquashfs -d /mnt/rlbench_data filename.squashfs</code></pre>
+                </li>
+              </ol>
+          
+              <p>If you encounter any discrepancies or have questions, please do not hesitate to reach out to the authors for assistance.</p>
+
+              <table>
+                <caption>Classification of the bimanual tasks</caption>
+                <thead>
+                  <tr>
+                    <th rowspan="2" style="text-align: center">Task</th>
+                    <th colspan="3" style="text-align: center">256x256 image size</th>
+                  </tr>
+
+                  <tr>
+                    <th style="text-align: center">Training</th>
+                    <th style="text-align: center">Validation</th>
+                    <th style="text-align: center">Test</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>(a) push box</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/T3FBE5HSYM#xDmHe5QuTbqF"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/EY19X36EQ0#orpkAH5UMtzb"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(b) lift a ball</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/2GGX1JRWQG#Utao5oN74DVL"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/7Y43E5JS3C#dcGWjP90qAzN"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(c) push two buttons</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/870YTD16PR#xKvha99MrDQa"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/YGR2C390PW#W0h09j8WEWB8"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(d) pick up a plate</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/VF9GCK12Q0#f6EWa7v3yLQL"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/6T76B7TBX8#XTCTzbTTTAjr"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(e) put item in drawer</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/NX7H4KMBSG#kyzkrkGUeYCM"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/HN7G7Y9QE8#tsCGL1dnLOtw"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(f) put bottle in fridge</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/K0WJAA61QR#3WN6BGcVbRgS"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/QHRXZTHQGR#oKX73K4JTknc"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(g) handover an item</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/SDMDYXZ7ZW#hJXqPagg6kdM"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/8D7KZ9PY80#FDkih2MsoZ5d"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(h) pick up notebook</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/QRTAWCPTTW#91cGmU3Hqcu1"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/DTZWZK8Q8M#VuGLZ6uiGRr2"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(i) straighten rope</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/11XS1R7PCW#ogPTJiIrw3Dy"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/V337EPMC0C#XFPYWpWK26YR"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(j) sweep dust pan</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/T8WCJ822J4#DEvQcVsQtgw4"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/RDNVD9B2HG#Hmd39XtlUbEM"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(k) lift tray</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/399NVYZJNW#qzu19lSbgEv5"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/X00EGA22RC#wh0FV0AANFR3"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(l) handover item (easy)</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/GX1ANN7WAW#SvsC2g3V6QwU"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/EPX0Z9WZK0#9KkizqzLDUN0"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                  <tr>
+                    <td>(m) take tray out of oven</td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/JPJ3715HXC#BqfqIzUVbxbx"><i class="fas fa-link"></i> Download</a></td>
+                    <td style="text-align: center"><a target="_blank" href="#"><i class="fas fa-link"></i> Coming soon</a></td>
+                    <td style="text-align: center"><a target="_blank" href="https://drive.proton.me/urls/562W73C414#HamMgmyDhH9z"><i class="fas fa-link"></i> Download</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+
 
   <section class="section">
 
